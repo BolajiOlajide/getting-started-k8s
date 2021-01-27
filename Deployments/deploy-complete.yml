@@ -20,11 +20,11 @@ spec:
     metadata:
       labels:
         app: web
-    spec: 
+    spec:
       terminationGracePeriodSeconds: 1
       containers:
       - name: hello-pod
-        image: nigelpoulton/getting-started-k8s:1.0
+        image: cooproton12/getting-started-k8s:1.1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

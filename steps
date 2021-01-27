@@ -1,0 +1,89 @@
+1. Build docker image with command
+
+```sh
+docker image build -t cooproton12/getting-started-k8s:1.0 .
+```
+
+2. If you aren't logged into docker yet, login with the command
+
+```sh
+docker login
+```
+
+2. Push created image to DockerHub
+
+```sh
+docker image push cooproton12/getting-started-k8s:1.0
+```
+
+3. Set kubernetes context with docker desktop
+
+4. Apply the pod to the cluster with the command
+
+```sh
+kubectl apply -f Pods/pod.yml
+```
+
+5. Watch the pods with the command
+
+```sh
+kubectl get pods --watch
+```
+
+6. Pods run on nodes. Think of nodes as infrastructure while a pod is an instance of your application.
+
+7. View more details about your pods with commands
+
+```sh
+kubectl get pods -o wide
+kubectl describe pods <pod-name>
+```
+
+8. Delete a pod with the command
+
+```sh
+kubectl delete pod <pod_name>
+```
+
+9. The imperative way of creating a service (which is used to access a Pod) is using the `kubectl expose pod` command
+
+```sh
+kubectl expose pod hello-pod --name=hello-svc --target-port=8080 --type=NodePort
+```
+
+10. The service should be running now, you can get the details using thw command
+
+```sh
+kubectl get svc
+```
+
+11. You should be able to use an of the IP addresses for any node with the port for the svc gotten from the above command.
+
+```sh
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+hello-svc    NodePort    10.128.52.142   <none>        8080:31599/TCP   5m35s
+kubernetes   ClusterIP   10.128.0.1      <none>        443/TCP          54m
+```
+
+Port number for the `hello-svc` service is `31599`.
+
+12. The declarative way is to use a `yaml` -> `Services/svc-nodeport.yml` using the command
+
+```sh
+kubectl apply -f Services/svc-nodeport.yml
+```
+
+13. A nodePort must be between `30000 - 32767`
+
+14. You can also make use of a loadbalancer service
+
+```sh
+kubectl apply -f Services/svc-lb.yml
+```
+
+15. You can automate the process of deployment and creating pods with the deployment service.
+Apply a deployment using the command
+
+```sh
+kubectl apply -f Deployments/deploy.yml
+```
