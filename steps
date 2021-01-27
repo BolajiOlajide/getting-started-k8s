@@ -87,3 +87,11 @@ Apply a deployment using the command
 ```sh
 kubectl apply -f Deployments/deploy.yml
 ```
+
+16. Rollout an upgrade
+
+```sh
+ kubectl rollout status deploy web-deploy
+```
+
+17. I used Linode sha.
